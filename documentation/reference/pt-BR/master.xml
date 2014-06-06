@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding="utf-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+   "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" []>
+<book lang="pt">
+
+    <xi:include href="bookinfo.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+
+    <!-- prefácio -->
+    <preface>
+        <title>Demoiselle Audit</title>
+        <para>
+            O Demoiselle Audit foi criado para suprir uma necessidade que a comunidade tinha de uma forma de historiar
+            os eventos das aplicações desenvolvidas com o Framework Demoiselle. Desde o inicio ainda na concepção do componente
+            buscamos as tecnologias, referências literárias e em padrões de mercado, as boas práticas e o que informações seriam
+            capazes de registrar um momento e torná-lo um insumo para uma possível auditoria.
+        </para>
+        <para>
+            Utilizamos duas fontes principais de referência o COBIT e o NIST. Sugerimos que essas fontes sejam usadas como base para
+            a implantação eficaz de um processo consistente para que em caso de auditoria a mesma seja válida. O Demoiselle Audit é
+            apenas uma peça no conjunto de procedimentos que garantem uma boa auditoria, apenas o uso do componente não é suficiente
+            em casos de ações judiciais, a confiabialidade e invioalabilidade devem ser garantidas para que essas informações sejam
+            consideradas relevantes.
+        </para>
+        <para>
+            O Demoiselle Audit é dividido em três módulos e uma implementação de um dashboard para auxilio no desenvolvimento.
+            <orderedlist numeration="arabic">
+                <listitem>
+                    <para>
+                        <caption>Core</caption>
+                        Principal módulo do sistema funicona com um agregador para suportar a plugabilidade dos Auditores e
+                        Processadores e tem mecanismo de tolerância a falha.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <caption>Auditores</caption>
+                        O módulo responsável por observar e capturar as informações da aplicação e enviar para o Core. A implementação
+                        de referência do Auditor fará a captura na camada de persistência da aplicação funcionando em conjunto com o JPA
+                        coletando os dados logo após a operação de CRUD ter sido concluída.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <caption>Processadores</caption>
+                        O módulo responsável pela conclusão do procedimento, ou seja ele tem a tarefa de persistir o elemento trilha.
+                        A implementação de referência do Processador envia para um serviço REST, mas podem haver implementações onde são
+                        enviados para um banco NoSQL, o mesmo banco da aplicação ou até mesmo um serviço de mensageria.
+                    </para>
+                </listitem>
+                 <listitem>
+                    <para>
+                        <caption>Dashboard</caption>
+                        Esta implementação não faz parte do mecanismo de funcionamento do Demoiselle Audit, mas serve como ferramenta de
+                        apoio à implantação e desenvolvimento do componente, ela consiste em quatro formas de visualizações dos dados
+                        persistidos pelo Demoiselle Audit e contém um serviço REST que recebe a trilha gerada pela implementação de
+                        referência do Processador, servindo de apoio à implantação do componente.
+                    </para>
+                </listitem>
+            </orderedlist>
+        </para>
+        <para>
+
+             <mediaobject>
+                <imageobject role="html">
+                    <imagedata fileref="images/SP800-92.pdf" align="center"
+                                                   format="PDF" scalefit="1" width="75%" />
+                </imageobject>
+                <caption>
+                    <para>NIST
+                    </para>
+                </caption>
+            </mediaobject>
+        </para>
+        <para>
+            <mediaobject>
+                <imageobject role="fo">
+                    <imagedata fileref="images/Arquitetura.png" align="center"
+                                                   format="PNG" scalefit="1" width="75%" />
+                </imageobject>
+                <imageobject role="html">
+                    <imagedata fileref="images/Arquitetura.png" align="center"
+                                                   format="PNG" scalefit="1" width="75%" />
+                </imageobject>
+                <caption>
+                    <para>Arquitetura da ferramenta Demoisele Audit.
+                    </para>
+                </caption>
+            </mediaobject>
+        </para>
+     </preface>
+
+    <!-- índice -->
+    <toc />
+
+    <!-- capítulos -->
+    <xi:include href="auditors.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+    <xi:include href="processors.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+    <xi:include href="configuracao.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+    <xi:include href="exemplo.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+    <xi:include href="recomendacoes.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+    <xi:include href="releasenotes.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+
+</book>

@@ -1,0 +1,57 @@
+<!-- Dashboard - System -->
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns:pe="http://primefaces.org/ui/extensions">
+
+	 <pe:masterDetail id="masterDetailSystem" level="#{systemDashboardMB.currentLevel}"
+					 selectLevelListener="#{systemDashboardMB.navigationHadler}" 
+					 style="width: 99%;">
+	
+		<pe:masterDetailLevel level="1" levelLabel="#{messages['system.level.1']}">
+		
+			<p:dataTable id="dataTableSistemas" value="#{systemDashboardMB.systemList}" var="system">
+				<p:column headerText="#{messages['system.table.systems']}">
+					<p:commandLink value="#{system.systemName}">
+						<pe:selectDetailLevel contextValue="#{system}" listener="#{systemDashboardMB.setSystem}"/>
+					</p:commandLink>
+				</p:column>
+			</p:dataTable>
+		    					
+		</pe:masterDetailLevel>
+		
+		
+		<pe:masterDetailLevel level="2" levelLabel="#{systemDashboardMB.system.systemName} (#{messages['system.level.2']})">
+		
+			<pe:timeline id="timelineSystem" value="#{systemDashboardMB.systems}" var="trail"
+				 editable="false" 
+				 eventMargin="15" eventMarginAxis="15"
+				 showMajorLabels="true" axisOnTop="true"
+				 groupsChangeable="false" groupsOnRight="false"
+				 stackEvents="true" eventStyle="box"
+				 showCurrentTime="true"
+				 showMinorLabels="true"
+				 showNavigation="true"
+				 preloadFactor="0.2"  
+				 width="100%"
+				 locale="pt_BR"
+				 widgetVar="timelineWidgetSystem">
+				 
+				<p:ajax event="lazyload" update="@none" listener="#{systemDashboardMB.onLazyLoad}"  
+			            onstart="$('#loadingText').css('visibility', 'visible')"   
+			            oncomplete="$('#loadingText').css('visibility', 'hidden')"/> 
+						 
+				<p:ajax event="select" update=":formTabs:detailTrailContent"
+						listener="#{dashboardMB.onSelect}"
+						oncomplete="PF('detailTrailWidget').show()"/>
+						
+				<h:outputText value="#{trail.userName}" />
+			
+			</pe:timeline>
+		    					
+		</pe:masterDetailLevel>
+	
+	</pe:masterDetail>
+    			
+</ui:composition>

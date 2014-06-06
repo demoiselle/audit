@@ -1,0 +1,62 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<p:dialog id="detailTrail" header="#{messages['detail.header']}" widgetVar="detailTrailWidget"
+			  showEffect="clip" hideEffect="clip" modal="true" onShow="PF('detailTrailWidget').toggleMaximize()" 
+			  onHide="PF('detailTrailWidget').toggleMaximize()">
+			  
+		<h:panelGroup id="detailTrailContent" layout="block">
+		
+			<h:panelGrid columns="2">
+				
+				<h:outputText value="#{messages['detail.field.systemName']} :" />
+				<h:outputText value="#{dashboardMB.event.data.systemName}" />
+				
+				<h:outputText value="#{messages['detail.field.userName']} :" />
+				<h:outputText value="#{dashboardMB.event.data.userName}" />
+				
+				<h:outputText value="#{messages['detail.field.where']} :" />
+				<h:outputText value="#{dashboardMB.event.data.where}" />
+				
+				<h:outputText value="#{messages['detail.field.profile']} :" />
+				<h:outputText value="#{dashboardMB.event.data.profile}" />
+				
+				<h:outputText value="#{messages['detail.field.what']} :" />
+				<h:outputText value="#{dashboardMB.event.data.what}" />
+				
+				<h:outputText value="#{messages['detail.field.when']} :" />
+				<h:outputText value="#{dashboardMB.event.data.when}">
+					<f:convertDateTime dateStyle="full" pattern="dd/MM/yyyy HH:mm:ss" type="both" locale="pt_BR" timeZone="America/Sao_Paulo"/>
+				</h:outputText>
+			</h:panelGrid> 
+			
+			<p:panel header="#{dashboardMB.serialObject.title}" toggleable="true" toggleSpeed="500" collapsed="false">
+
+					<p:dataTable value="#{dashboardMB.keys}" var="field" >
+					
+						<p:column headerText="#{messages['detail.table.field']}">
+							<h:outputText value="#{field}" />	
+						</p:column>
+						
+						<p:column headerText="#{messages['detail.table.value']}">
+							<h:outputText value="#{dashboardMB.serialObject.map[field]}" />	
+						</p:column>
+						
+					</p:dataTable>
+				
+			</p:panel>
+						
+		</h:panelGroup>
+
+		<f:facet name="footer">
+			<h:panelGroup layout="block" style="text-align:right; padding:2px; white-space:nowrap;">
+				<p:commandButton type="button" value="#{messages['detail.button.close']}" onclick="PF('detailTrailWidget').hide()" />
+			</h:panelGroup>
+		</f:facet>
+
+	</p:dialog>
+	
+</ui:composition>

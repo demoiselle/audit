@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+   "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<chapter id="audit-auditor">
+
+    <title>Auditor</title>
+    <para>
+        O objetivo dos Auditors é estabelecer a camada que será auditada, atualmente exste dois Auditors: 
+        camada de Persistência chamada PersistenceAuditor e para Visão chamado ViewAuditor.
+    </para>
+    <para>
+        Um Auditor tem como objetivo executar a coleta de dados, preenchimento do objeto Trail com dados e 
+        disparar evento para o Processors.
+    </para>
+    <para>
+        Os dados coletados pelos Auditor são:
+        <itemizedlist>
+            <listitem><para><literal>Quem fez a operação?</literal></para></listitem>
+            <listitem><para><literal>Horário da operação?</literal></para></listitem>
+            <listitem><para><literal>IP de origem</literal></para></listitem>
+            <listitem><para><literal>Nome do Sistema</literal></para></listitem>
+            <listitem><para><literal>O que foi realizado?</literal></para></listitem>
+            <listitem><para><literal>Qual objeto foi manipulado?</literal></para></listitem>
+            <listitem><para><literal>Quais foram os dados atingidos pela operação?</literal></para></listitem>
+        </itemizedlist>
+    </para>
+
+    <section>
+        <title>Auditor de Persistência</title>
+        <para>
+            Para utilizar esse Auditor é necessário adicionar no <filename>pom.xml</filename> do seu projeto o seguinte trecho:
+        </para>
+        <programlisting role="XML"><![CDATA[<dependency>
+    <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
+    <artifactId>demoiselle-audit-auditors-persistence</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+</dependency>]]></programlisting>
+    </section>
+    
+    <section>
+        <title>Auditor de Visão</title>
+        <para>
+            Para utilizar esse Auditor é necessário adicionar no <filename>pom.xml</filename> do seu projeto o seguinte trecho:
+        </para>
+        <programlisting role="XML"><![CDATA[<dependency>
+    <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
+    <artifactId>demoiselle-audit-auditors-view</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+</dependency>]]></programlisting>
+    </section>
+    
+    <section>
+        <title>Criando seu próprio Auditor</title>
+        <para>
+            Se você tiver interesse em auditar outra camada da sua aplicação você deverá:
+        </para>
+        <orderedlist numeration="arabic">
+            <listitem>
+                <para>
+                    Criar um projeto Maven e utilizar o parent no seu <filename>pom.xml</filename>
+                </para>
+                <programlisting role="XML"><![CDATA[<parent>
+    <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
+    <artifactId>demoiselle-audit-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+</parent>]]></programlisting>
+            </listitem>   
+            <listitem>
+                <para>Criar uma classe que extenda de <emphasis>br.gov.frameworkdemoiselle.component.audit.implementation.auditors.AbstractAuditor</emphasis>;</para>
+            </listitem>          
+            <listitem>
+                <para>Implementar os métodos que irão interceptar o ciclo de vida da camada;</para>
+            </listitem>
+            <listitem>
+                <para>Criar um objeto do tipo Trail e preencher seus dados básicos;</para>
+            </listitem>
+            <listitem>
+                <para>Chamar o método da <emphasis>consume([Objeto Trail])</emphasis>;</para>
+            </listitem>
+            <listitem>
+                <para>
+                    Caso seu Processor precise ser configurado, você deverá criar uma Classe que utilize a funcionalidade @Configuration do Demoiselle <ulink url="http://demoiselle.sourceforge.net/docs/framework/reference/2.4.0/html/configuracao.html"><literal>Demoiselle Configuration</literal></ulink>, 
+                    como exemplo você poderá se basear na classe <emphasis>impl/processors/rest/src/main/java/br/gov/frameworkdemoiselle/component/audit/processors/rest/RESTConfig.java</emphasis>
+                </para>
+                <para>
+                    Apartir desse momento o componente estará apto a repassar esse objeto para os Processors definidos no pom.xml do seu projeto.
+                </para>
+                <para>
+                    Na sua implementação do seu sistema você deverá informar as seguintes informações:
+                
+                    <table>
+                        <title>Configurações</title>
+                        <tgroup cols="2">
+                            <colspec colwidth="20*"/>
+                            <colspec colwidth="80*"/>
+                            <thead>
+                                <row>
+                                    <entry>
+                                        <emphasis rold="bold">Dado</emphasis>
+                                    </entry>
+                                    <entry>
+                                        <emphasis rold="bold">Local de Preenchimento</emphasis>
+                                    </entry>
+                                </row>
+                            </thead>
+                            <tbody>
+                                <row>
+                                    <entry>
+                                        Profile
+                                    </entry>
+                                    <entry>
+                                        user.setAttribute("PROFILE", [Profile/Perfil do usuário no sistema])
+                                    </entry>
+                                </row>
+                                <row>
+                                    <entry>
+                                        Where
+                                    </entry>
+                                    <entry>
+                                        user.setAttribute("IP", [IP do usuário no sistema])
+                                    </entry>
+                                </row>
+                                <row>
+                                    <entry>
+                                        UserName
+                                    </entry>
+                                    <entry>
+                                        user.setAttribute("NAME", [Login/Nome/Identificador do usuário no sistema])
+                                    </entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                    </table>
+                </para>
+                <para>
+                    Maiores informações no link <ulink url="http://demoiselle.sourceforge.net/docs/framework/reference/2.4.0/html/security.html"><literal>Demoiselle Security</literal>                    </ulink>
+                </para>
+                <para>
+                    Um exemplo de um Auditor esta na classe <emphasis>impl/auditors/persistence/src/main/java/br/gov/frameworkdemoiselle/component/audit/auditors/persistence/PersistenceAuditor.java</emphasis>
+                </para>
+
+                
+            </listitem>
+        </orderedlist>
+    </section>
+
+</chapter>

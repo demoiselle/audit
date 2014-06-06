@@ -1,0 +1,36 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+    <ui:define name="body">
+        <div class="loginWrapper">
+            <div class="esqueciSenhaPanel">
+                <div class="head">
+                    <h5 class="iUser">#{messages['button.esqueci_senha']}</h5>
+                </div>
+                <h:form id="valid" styleClass="mainForm" >
+                    <fieldset>
+                        <div class="loginRow noborder">
+                            <label for="req1">#{messages['login.email']} :</label>
+                            <div class="loginInput">
+                                <p:inputText id="email"
+                                             value="#{aminesiaMB.email}"
+                                             size="60" maxlength="60" autocomplete="off"
+                                             styleClass="validate[required,maxSize[60],custom[email]]"/>
+                            </div>
+                            <div class="fix"></div>
+                        </div>
+                        <div class="loginRow">
+                            <p:commandButton id="login_button"
+                                             value="#{messages['button.lembrar']}"
+                                             action="#{aminesiaMB.lembrar()}"
+                                             styleClass="submitForm"
+                                             ajax="false" />
+
+                        </div>
+                    </fieldset>
+                </h:form>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

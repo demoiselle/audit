@@ -1,0 +1,50 @@
+<!-- Dashboards -->
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns:pe="http://primefaces.org/ui/extensions" template="/template/main.xhtml">
+
+    <ui:define name="body">
+    
+    	<h:form id="formTabs">
+    	
+    		<p:growl id="growl" showSummary="true" showDetail="false" autoUpdate="false"/>
+    		
+    		<div id="loadingText" style="font-weight:bold; margin:-5px 0 5px 0; visibility:hidden;">#{messages['timeline.loading.text']}</div>
+    		
+    		<p:tabView id="tabs" dynamic="true" cache="true">
+    		
+    			<p:tab id="tabSystem" title="#{messages['tabs.system']}">
+    			
+    				<ui:include src="/dash/system/dash.xhtml" />
+    			
+    			</p:tab>
+    			
+    			
+    			<p:tab id="tabUser" title="#{messages['tabs.user']}">
+    			
+    				<ui:include src="/dash/user/dash.xhtml" />
+    			
+    			</p:tab>
+    			
+    			<p:tab id="tabFeature" title="#{messages['tabs.feature']}">
+    			
+    				<ui:include src="/dash/feature/dash.xhtml" />
+    			
+    			</p:tab>
+    			
+    			<p:tab id="tabTrack" title="#{messages['tabs.track']}">
+    			
+    				<ui:include src="/dash/track/dash.xhtml" />
+    			
+    			</p:tab>
+    			
+    		</p:tabView>
+    		
+    		<ui:include src="/dash/detailTrail.xhtml" />
+    	
+    	</h:form>
+    
+    </ui:define>
+</ui:composition>

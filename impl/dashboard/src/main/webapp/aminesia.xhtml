@@ -1,0 +1,43 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+    <ui:define name="body">
+        <div class="loginWrapper">
+            <div class="aminesiaPanel">
+                <div class="head">
+                    <h5 class="iUser">#{messages['login.altera']}</h5>
+                </div>
+                <h:form id="valid" styleClass="mainForm" >
+                    <fieldset>
+                        <div class="loginRow">
+                            <label for="req2">#{messages['login.senhanova']} :</label>
+                            <div class="loginInput">
+                                <p:password id="passwordNew" value="#{aminesiaMB.senhanova}" />
+                            </div>
+                            <div class="fix"></div>
+                        </div>
+                        <div class="loginRow">
+                            <label for="req2">#{messages['login.resenhanova']} :</label>
+                            <div class="loginInput">
+                                <p:password id="rePasswordNew" value="#{aminesiaMB.senharepetida}" />
+                            </div>
+                            <div class="fix"></div>
+                        </div>
+
+                        <div class="loginRow">
+                            <p:commandButton id="login_button"
+                                             value="#{messages['button.alterar_senha']}"
+                                             action="#{aminesiaMB.update()}"
+                                             styleClass="submitForm"
+                                             ajax="false" >
+                                <f:param value="#{aminesiaMB.aminesia}" name="cod_aminesia"/>
+                            </p:commandButton>
+                            <div class="fix"></div>
+                        </div>
+                    </fieldset>
+                </h:form>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

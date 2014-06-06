@@ -1,0 +1,15 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+    <ui:define name="body">
+    	<h:form>
+	        <div class="erro_box">
+				<h2>#{messages['pagina.erro.500.titulo']}</h2>
+			    <p>#{messages['pagina.erro.500.mensagem']}<a href="mailto:#{messages['mailto.address']}">#{messages['pagina.erro.500.mensagem.contato']}</a></p>
+			    <a href="#"><strong><h:commandLink value="#{messages['button.back']}" action="/index.jsf" /></strong></a>
+			</div>
+    	</h:form>
+    </ui:define>
+    
+</ui:composition>

@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
+
+    <!-- If you are using tomcat6/tomcat7/gae then uncomment this listener -->
+    <!-- 
+        <listener>
+            <listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
+        </listener>
+	-->
+
+    <!-- If you are using servlet 2.5 then uncomment this listener -->
+    <!--
+    <listener>
+            <listener-class>br.gov.frameworkdemoiselle.util.ServletListener</listener-class>
+    </listener>
+    <filter>
+            <filter-name>Demoiselle Servlet Filter</filter-name>
+            <filter-class>br.gov.frameworkdemoiselle.util.ServletFilter</filter-class>
+    </filter>
+    <filter-mapping>
+            <filter-name>Demoiselle Servlet Filter</filter-name>
+            <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    -->
+
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.jsf</url-pattern>
+    </servlet-mapping>
+
+    <security-constraint>
+        <display-name>Restrict raw XHTML Documents</display-name>
+        <web-resource-collection>
+            <web-resource-name>XHTML</web-resource-name>
+            <url-pattern>*.xhtml</url-pattern>
+        </web-resource-collection>
+        <auth-constraint />
+    </security-constraint>
+
+    <context-param>
+        <param-name>org.primefaces.extensions.DELIVER_UNCOMPRESSED_RESOURCES</param-name>
+        <param-value>false</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>
+            org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap
+        </listener-class>
+    </listener>
+    <servlet>
+        <servlet-name>Resteasy</servlet-name>
+        <servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Resteasy</servlet-name>
+        <url-pattern>/rest/*</url-pattern>
+    </servlet-mapping>
+    <context-param>
+        <param-name>resteasy.scan</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>resteasy.servlet.mapping.prefix</param-name>
+        <param-value>/rest</param-value>
+    </context-param>
+    
+   <!-- TOMCAT 7
+   <servlet>
+        <servlet-name>Resteasy</servlet-name>
+        <servlet-class>
+            org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher
+        </servlet-class>
+        <init-param>
+            <param-name>javax.ws.rs.Application</param-name>
+            <param-value>com.restfully.shop.services.ShoppingApplication</param-value>
+        </init-param>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Resteasy</servlet-name>
+        <url-pattern>/rest/*</url-pattern>
+    </servlet-mapping>
+    <context-param>
+        <param-name>resteasy.scan</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>resteasy.servlet.mapping.prefix</param-name>
+        <param-value>/rest</param-value>
+    </context-param>
+    -->
+
+</web-app>

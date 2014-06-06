@@ -1,0 +1,238 @@
+<?xml version='1.0' encoding="utf-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+   "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" []>
+<chapter id="audit-configuracao">
+
+    <title>Configurações do Audit</title>
+    <para>
+        O Demoseille Audit possui como base 3 módulos (Core, Processors e Auditors). O Core orquestra a integração
+        entre os Processadores e os Auditores, que são implementações de cada projeto.
+    </para>
+    <section>
+        <title>Instação no Projeto</title>
+        <para>
+            Em seu projeto que você deseja auditar, você deve adicionar no seu <filename>pom.xml</filename> no campo de dependências do projeto as seguintes linhas:
+        </para>
+            <programlisting role="XML"><![CDATA[<dependencies>
+    <dependency>
+        <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
+        <artifactId>demoiselle-audit-auditors-persistence</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+        <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
+        <artifactId>demoiselle-audit-auditors-view</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+        <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
+        <artifactId>demoiselle-audit-processors-rest</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+        <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
+        <artifactId>demoiselle-audit-processors-mongo</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+</dependencies>]]></programlisting>
+        <para>
+            No código acima estamos utilizando o Auditor para a camada de Persistência e para a camada de Visão e o Processor para REST e o Processor para MONGO, você poderá adicionar quantos Processors e quantos Auditors você quiser.
+        </para>
+    </section>
+    
+    
+    <section>
+        <title>Configurações do Sistema</title>
+        <para>
+            No seu arquivo <filename>demoiselle.properties</filename> você precisará adicionar as seguintes linhas:
+        </para>
+        <table>
+            <title>Configuração demoiselle.properties</title>
+            <tgroup cols="2">
+                <colspec colwidth="50*"/>
+                <colspec colwidth="50*"/>
+                <thead>
+                    <row>
+                        <entry>
+                            <emphasis rold="bold">Chave</emphasis>
+                        </entry>
+                        <entry>
+                            <emphasis rold="bold">Descrição</emphasis>
+                        </entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>
+                            frameworkdemoiselle.audit.system
+                        </entry>
+                        <entry>
+                            Nome do seu Sistema
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            frameworkdemoiselle.audit.scheduler.repeat.interval
+                        </entry>
+                        <entry>
+                            Intervalo de tempo em milisegundos para o reprocessamento das trilhas
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            frameworkdemoiselle.audit.scheduler.start.time
+                        </entry>
+                        <entry>
+                            Tempo em milisegundos de quando será executado o primeiro reprocessamento após o inicio da aplicação
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            frameworkdemoiselle.audit.folder.fail.objects
+                        </entry>
+                        <entry>
+                            Pasta onde a aplicação terá direito de escrita e leitura para o armazenamento das trilhas que apresentaram problemas no processamento
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <para>
+            Para o Processor de REST você deverá adicionar a seguinte linha:
+        </para>
+        <table>
+            <title>Configuração demoiselle.properties</title>
+            <tgroup cols="2">
+                <colspec colwidth="50*"/>
+                <colspec colwidth="50*"/>
+                <thead>
+                    <row>
+                        <entry>
+                            <emphasis rold="bold">Chave</emphasis>
+                        </entry>
+                        <entry>
+                            <emphasis rold="bold">Descrição</emphasis>
+                        </entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>
+                            frameworkdemoiselle.audit.processor.rest.server.url
+                        </entry>
+                        <entry>
+                            Endereço do Serviço REST (Ex.: http://localhost:8080/dash)
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <para>
+            Para o Processor de MONGO você deverá adicionar a seguinte linha:
+        </para>
+        <table>
+            <title>Configuração demoiselle.properties</title>
+            <tgroup cols="2">
+                <colspec colwidth="70*"/>
+                <colspec colwidth="30*"/>
+                <thead>
+                    <row>
+                        <entry>
+                            <emphasis rold="bold">Chave</emphasis>
+                        </entry>
+                        <entry>
+                            <emphasis rold="bold">Descrição</emphasis>
+                        </entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>
+                            frameworkdemoiselle.audit.processor.mongo.server.url
+                        </entry>
+                        <entry>
+                            Endereço do MongoDB
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            frameworkdemoiselle.audit.processor.mongo.database.name
+                        </entry>
+                        <entry>
+                            Nome do Database
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            frameworkdemoiselle.audit.processor.mongo.collection.name
+                        </entry>
+                        <entry>
+                            Nome da Coleção
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            frameworkdemoiselle.audit.processor.mongo.database.user
+                        </entry>
+                        <entry>
+                            Usuário (se necessário)
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            frameworkdemoiselle.audit.processor.mongo.database.password
+                        </entry>
+                        <entry>
+                            Senha
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        
+        <section>
+            <title>PersistenceAuditor</title>
+            <para>
+                Você poderá escolher quais serão suas Entidades JPA que serão auditadas na camada de persistência, para isso adicione a anotação do JPA @EntityListeners com o valor de PersistenceAuditor.class.
+            </para>
+            <para>
+                Exemplo :
+            </para>
+            <programlisting role="JAVA"><![CDATA[@Entity
+@EntityListeners(value = PersistenceAuditor.class)
+public class Bookmark implements Serializable {
+    ...
+}]]></programlisting>
+        </section>
+        
+    </section>
+
+    <section>
+        <title>Dashboard</title>
+        <para>
+            Para facilitar a busca de informações do que foi feito no sistema contruímos um Dashboard que traz 4 visões diferentes dos mesmos dados:
+            <itemizedlist>
+                <listitem><para>Visão de Sistema que se aprofunda em Pessoa e a Funcionalidade executada;</para></listitem>
+                <listitem><para>Visão da Pessoa que se aprofunda no Sistema e a Funcionalidade executada;</para></listitem>
+                <listitem><para>Visão de Funcionalidade que se aprofunda no Sistema e a Pessoa que executou;</para></listitem>
+                <listitem><para>Visão de Rastreamento que através de filtros como Sistema, Objeto e Identificador do Objeto mostrar o histórico de operações realizadas no Objeto;</para></listitem>
+            </itemizedlist>
+            
+            O Dashboard também fornece um serviço de REST para o Processor RESTProcessor, caso você utilize este processor no seu projeto e não queira implementar seu próprio serviço de REST você poderá utilizar o Dashboard para essa finalidade.
+        </para>
+        
+        <section>
+            <title>Como instalar o Dashboard</title>
+            <para>
+                Faça um clone do projeto e acesse a pasta <emphasis>demoiselle-audit/impl/dashboard</emphasis>, você precisará alterar o arquivo persistence.xml de acordo com as configurações do seu banco de dados onde serão armazenados as trilhas de auditoria, após feito essa configuração abra um terminal na pasta do "dashboard" e execute o comando maven:                
+            </para>
+            <programlisting role="outFile:mvn"><![CDATA[$mvn clean compile package]]></programlisting>
+            <para>
+                Esse comando irá gerar um arquivo chamado <emphasis>demoiselle-audit-dashboard.war</emphasis> na pasta target.
+                Agora que você já tem o arquivo .war você poderá fazer o deploy no seu servidor.
+            </para>
+        </section>
+            
+    </section>
+			
+</chapter>

@@ -1,0 +1,83 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<ui:define name="crud">
+		<h:form>
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton value="#{messages['button.new']}" image="ui-icon-document" action="#{usuarioListMB.getNextView}"
+						actionListener="#{usuarioListMB.clear}" ajax="false" />
+
+				</p:toolbarGroup>
+			</p:toolbar>
+			
+			
+			<fieldset>
+				<div class="widget first">
+					<div class="head">
+						<h5 class="iFrames">#{messages['usuario.list.table.title']}</h5>
+					</div>
+			
+					<p:dataTable id="list" var="bean" value="#{usuarioListMB.resultList}" widgetVar="listaUsuarios"
+								 filteredValue="#{usuarioListMB.usuarioFiltro}">
+								 
+						<p:column style="width:5%;" sortBy="#{bean.id}">
+							<f:facet name="header">#{messages['usuario.label.id']}</f:facet>
+							<h:outputText value="#{bean.id}" />
+						</p:column>
+								
+						<p:column sortBy="#{bean.nome}" filterBy="#{bean.nome}"
+								  filterMatchMode="contains">
+							<f:facet name="header">#{messages['usuario.label.nome']}</f:facet>
+							<h:commandLink action="#{usuarioListMB.getNextView}" actionListener="#{usuarioListMB.clear}">
+								<h:outputText value="#{bean.nome}" />
+								<f:param name="id" value="#{bean.id}" />
+							</h:commandLink>
+						</p:column>
+						
+						<p:column sortBy="#{bean.usuario}" filterBy="#{bean.usuario}"
+								  filterMatchMode="contains">
+							<f:facet name="header">#{messages['usuario.label.usuario']}</f:facet>
+							<h:commandLink action="#{usuarioListMB.getNextView}" actionListener="#{usuarioListMB.clear}">
+								<h:outputText value="#{bean.usuario}" />
+								<f:param name="id" value="#{bean.id}" />
+							</h:commandLink>
+						</p:column>
+								
+						<p:column sortBy="#{bean.email}" filterBy="#{bean.email}"
+								  filterMatchMode="contains">
+							<f:facet name="header">#{messages['usuario.label.email']}</f:facet>
+							<h:commandLink action="#{usuarioListMB.getNextView}" actionListener="#{usuarioListMB.clear}">
+								<h:outputText value="#{bean.email}" />
+								<f:param name="id" value="#{bean.id}" />
+							</h:commandLink>
+						</p:column>
+								
+						<p:column sortBy="#{bean.orgao}" filterBy="#{bean.orgao.nome}"
+								  filterMatchMode="contains">
+							<f:facet name="header">#{messages['usuario.label.orgao']}</f:facet>
+							<h:commandLink action="#{usuarioListMB.getNextView}" actionListener="#{usuarioListMB.clear}">
+								<h:outputText value="#{bean.orgao.nome}" />
+								<f:param name="id" value="#{bean.id}" />
+							</h:commandLink>
+						</p:column>
+						
+						<p:column sortBy="#{bean.isAtivo}">
+							<f:facet name="header">#{messages['usuario.label.isAtivo']}</f:facet>
+							<h:commandLink action="#{usuarioListMB.getNextView}" actionListener="#{usuarioListMB.clear}">
+								<h:outputText value="#{bean.isAtivo ? messages['usuario.label.isAtivo.sim'] : messages['usuario.label.isAtivo.nao']}" />
+								<f:param name="id" value="#{bean.id}" />
+							</h:commandLink>
+						</p:column>
+						
+								
+					</p:dataTable>
+				</div>
+			</fieldset>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

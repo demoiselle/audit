@@ -1,0 +1,10 @@
+/target
+/.settings
+/.classpath
+/.project
+/deployments
+
+.settings
+.project
+target
+.classpath

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-deployment-structure>
+<!-- <jboss-deployment-structure xmlns="urn:jboss:deployment-structure:1.1"> -->
+
+	<deployment>
+		<dependencies>
+			<module name="org.apache.httpcomponents" />
+			<module name="org.apache.commons.lang" />
+			<module name="org.apache.commons.codec" />
+			<module name="org.apache.commons.beanutils" />
+			<module name="org.apache.commons.configuration" />
+
+			<module name="org.codehaus.jackson.jackson-jaxrs" />
+			<module name="org.codehaus.jackson.jackson-core-asl" />
+			<module name="org.codehaus.jackson.jackson-mapper-asl" />
+		</dependencies>
+	</deployment>
+
+</jboss-deployment-structure>

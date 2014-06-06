@@ -1,0 +1,58 @@
+<!-- Dashboard - User -->
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns:pe="http://primefaces.org/ui/extensions">
+
+	<pe:masterDetail id="masterDetailUser" level="#{usersDashboardMB.currentLevel}"
+					 selectLevelListener="#{usersDashboardMB.navigationHadler}"
+					 style="width: 99%;">
+	
+		<pe:masterDetailLevel level="1" levelLabel="#{messages['user.level.1']}">
+		
+			<p:dataTable id="dataTableUsers" value="#{usersDashboardMB.usersList}" var="user">
+				<p:column headerText="#{messages['user.table.user']}">
+					<p:commandLink value="#{user.userName}">
+						<pe:selectDetailLevel contextValue="#{user}" listener="#{usersDashboardMB.setUser}"/>
+					</p:commandLink>
+				</p:column>
+			</p:dataTable>
+			
+		    					
+		</pe:masterDetailLevel>
+		
+		<pe:masterDetailLevel level="2" levelLabel="#{usersDashboardMB.user.userName} (#{messages['user.level.2']})">
+			
+			<pe:timeline id="timelineUser" value="#{usersDashboardMB.users}" var="trail"
+				 editable="false" 
+				 eventMargin="15" eventMarginAxis="15"
+				 showMajorLabels="true" axisOnTop="true"
+				 groupsChangeable="false" groupsOnRight="false"
+				 stackEvents="true" eventStyle="box"
+				 showCurrentTime="true"
+				 showMinorLabels="true"
+				 showNavigation="true"
+				 preloadFactor="0.2"
+				 width="100%"
+				 locale="pt_BR"
+				 widgetVar="timelineWidgetUser">
+				 
+				<p:ajax event="lazyload" update="@none" listener="#{usersDashboardMB.onLazyLoad}"  
+			            onstart="$('#loadingText').css('visibility', 'visible')"   
+			            oncomplete="$('#loadingText').css('visibility', 'hidden')"/>
+				
+				<p:ajax event="select" update=":formTabs:detailTrailContent"
+						listener="#{dashboardMB.onSelect}"
+						oncomplete="PF('detailTrailWidget').show()"/>
+						 
+				<h:outputText value="#{trail.systemName}" />
+			
+			</pe:timeline>
+		    					
+		</pe:masterDetailLevel>
+		
+	
+	</pe:masterDetail>
+    			
+</ui:composition>

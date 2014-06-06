@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+   "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<chapter id="audit-processor">
+
+    <title>Processor</title>
+    <para>
+        Um Processor tem como finalidade dar um destino que você deseja para o objeto que representa a trilha de auditoria.
+    </para>
+    <para>
+        Atualmente estamos disponibilizando um Processor de REST para atender a questão de ser multi-sistema e outro Processor para MONGO.
+    </para>
+
+    <section>
+        <title>Processor REST</title>
+        <para>
+            Para utilizar esse Processor é necessário adicionar no <filename>pom.xml</filename> do seu projeto o seguinte trecho:
+        </para>
+        <programlisting role="XML"><![CDATA[<dependency>
+    <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
+    <artifactId>demoiselle-audit-processors-rest</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+</dependency>]]></programlisting>
+        <para>
+            Para o correto funcionamento é necessário adicionar no <filename>demoiselle.properties</filename> as seguintes configurações:
+            <table>
+                <title>Configuração demoiselle.properties</title>
+                <tgroup cols="2">
+                    <colspec colwidth="50*"/>
+                    <colspec colwidth="50*"/>
+                    <thead>
+                        <row>
+                            <entry>
+                                <emphasis rold="bold">Chave</emphasis>
+                            </entry>
+                            <entry>
+                                <emphasis rold="bold">Descrição</emphasis>
+                            </entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>
+                                frameworkdemoiselle.audit.processor.rest.server.url
+                            </entry>
+                            <entry>
+                                URL do serviço REST para o envio das trilhas.
+                            </entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </para>
+        
+    </section>
+    
+    <section>
+        <title>Processor MONGO</title>
+        <para>
+            Para utilizar esse Processor é necessário adicionar no <filename>pom.xml</filename> do seu projeto o seguinte trecho:
+        </para>
+        <programlisting role="XML"><![CDATA[ <dependency>
+    <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
+    <artifactId>demoiselle-audit-processors-mongo</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+</dependency>]]></programlisting>
+        <para>
+            Para o correto funcionamento é necessário adicionar no <filename>demoiselle.properties</filename> as seguintes configurações:
+            <table>
+                <title>Configuração demoiselle.properties</title>
+                <tgroup cols="2">
+                    <colspec colwidth="70*"/>
+                    <colspec colwidth="30*"/>
+                    <thead>
+                        <row>
+                            <entry>
+                                <emphasis rold="bold">Chave</emphasis>
+                            </entry>
+                            <entry>
+                                <emphasis rold="bold">Descrição</emphasis>
+                            </entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>
+                                frameworkdemoiselle.audit.processor.mongo.server.url
+                            </entry>
+                            <entry>
+                                URL do servidor onde se encontra o MongoDB
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>
+                                frameworkdemoiselle.audit.processor.mongo.database.name
+                            </entry>
+                            <entry>
+                                URL do servidor onde se encontra o MongoDB
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>
+                                frameworkdemoiselle.audit.processor.mongo.collection.name
+                            </entry>
+                            <entry>
+                                Nome da coleção
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>
+                                frameworkdemoiselle.audit.processor.mongo.database.user
+                            </entry>
+                            <entry>
+                                Usuário (se necessário)
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>
+                                frameworkdemoiselle.audit.processor.mongo.database.password
+                            </entry>
+                            <entry>
+                                Senha
+                            </entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </para>
+    </section>
+    
+    <section>
+        <title>Criando seu próprio Processor</title>
+        <para>
+            Você poderá criar o seu próprio ponto de extensão, podendo ser um JMS, FTP, Banco de Dados NoSql, você tem a liberdade de criar, para que isso sejá possível você deve criar um projeto Maven e utilizar o parent no seu <filename>pom.xml</filename>:
+        </para>
+        <orderedlist numeration="arabic">
+            <listitem>
+                <para>
+                    Criar um projeto Maven e utilizar o parent no seu pom.xml
+                </para>
+                <programlisting role="XML"><![CDATA[<parent>
+    <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
+    <artifactId>demoiselle-audit-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+</parent>]]></programlisting>
+            </listitem>   
+            <listitem>
+                <para>Criar uma classe que extenda de <emphasis>br.gov.frameworkdemoiselle.component.audit.implementation.processor.AbstractProcessor</emphasis> e implementar o método <emphasis>public void execute(@Observes @AuditProcessor Trail trail)</emphasis></para>
+            </listitem>          
+            <listitem>
+                <para>É dentro do bloco de código você implementará o destino que você deseja dar ao objeto Trail.</para>
+            </listitem>
+            <listitem>
+                <para>Para o bom funcionamento do seu Processor você deverá seguir as seguintes recomendações:</para>
+            </listitem>
+            <listitem>
+                <para>Antes de implementar seu código é necessário chamar o método <emphasis>super.execute(trail)</emphasis> para que o componente possa saber qual é a classe do Processor que esta sendo processada, isso é necessário para a situação de falha na execução do seu Processor e o componente possa reprocessar novamente no futuro;</para>
+                <para>Quando houver algum tratamento de exceção no seu código como blocos try e catch você deverá além de realizar seu próprio tratamento a chamada do método <emphasis>fail([String com a mensagem de Erro], [Objeto Trail]);</emphasis> para que o componente possa reprocessar novamente no futuro;</para>
+            </listitem>
+        </orderedlist>
+    </section>
+
+</chapter>

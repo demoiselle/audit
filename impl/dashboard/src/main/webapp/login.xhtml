@@ -1,0 +1,52 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+    <ui:define name="body">
+        <div class="loginWrapper">
+            <div class="loginPanel">
+                <div class="head">
+                	<h5 class="iUser">#{messages['login.label']}</h5>
+                </div>
+                <h:form id="valid" styleClass="mainForm" >
+                    <fieldset>
+                        <div class="loginRow noborder">
+                            <label for="usuario">#{messages['login.usuario']} :</label>
+                            <div class="loginInput">
+                                <h:inputText id="usuario"
+                                             value="#{identity.usuario}" 
+                                             size="30" maxlength="30" 
+                                             styleClass="validate[required,maxSize[30]]"/>
+                            </div>
+                            <div class="fix"></div>
+                        </div>
+
+                        <div class="loginRow">
+                            <label for="password">#{messages['login.senha']} :</label>
+                            <div class="loginInput">
+                                <p:password id="password" value="#{identity.password}" 
+                                			styleClass="validate[required]"/>  
+                            </div>
+                            <div class="fix"></div>
+                        </div>
+                        
+                       <!--  <div class="loginRow">
+                            <label></label>
+                            <div class="rememberMe">
+                                <p:selectBooleanCheckbox id="lembreMe" name="lembreMe" value="# {identity.lembreMeCookie}" itemLabel="#{messages['login.lembre.me']}"/>  
+                            </div>
+                            <div class="fix"></div>
+                        </div> -->
+
+                            <p:commandButton id="login_button"
+                                             value="#{messages['button.login']}"
+                                             action="#{identity.login}"
+                                             styleClass="submitForm"
+                                             ajax="false" />
+	                                             
+                    </fieldset>
+                </h:form>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

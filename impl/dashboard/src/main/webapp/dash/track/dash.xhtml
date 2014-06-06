@@ -1,0 +1,132 @@
+<!-- Dashboard - Track -->
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns:pe="http://primefaces.org/ui/extensions">
+
+
+	<p:panelGrid columns="2">
+	
+		<p:outputLabel value="#{messages['track.system.name']}"/>
+		<h:selectOneMenu id="systemList" value="#{trackDashboardMB.system}" 
+						 valueChangeListener="#{trackDashboardMB.onChangeSystem}"
+						 onchange="submit()">
+			<f:selectItem itemValue="null" itemLabel="#{messages['track.combobox.select.one']}"/>
+			<f:selectItems value="#{trackDashboardMB.systems}" var="system" itemLabel="#{system}" itemValue="#{system}"/>
+		</h:selectOneMenu>
+		
+		<p:outputLabel value="#{messages['track.system.object']}"/>
+		<h:selectOneMenu id="objectList" value="#{trackDashboardMB.object}" 
+						 valueChangeListener="#{trackDashboardMB.onChangeObject}"
+						 onchange="submit()">
+			<f:selectItem itemValue="null" itemLabel="#{messages['track.combobox.select.one']}"/>
+			<f:selectItems value="#{trackDashboardMB.objects}" var="object" itemLabel="#{object}" itemValue="#{object}"/>
+		</h:selectOneMenu>
+		
+		<p:outputLabel value="#{messages['track.system.object.id']} [#{trackDashboardMB.objectIdName}] = "/>
+		<h:inputText value="#{trackDashboardMB.objectIdValue}"/>
+		
+		<p:outputLabel value=""/>
+		<p:commandButton value="#{messages['track.button.search']}" actionListener="#{trackDashboardMB.search}" update="tracking"/>
+		
+	</p:panelGrid>
+	 
+	<br/>
+	
+	<h:panelGroup id="tracking">
+	
+		<div class="wrapper-history">
+		
+			<div class="wrapper-history-field">
+			
+				<ul>
+					<li>
+						<table>
+							<thead>
+								<tr>
+									<td>#{messages['detail.field.userName']}</td>
+								</tr>
+								<tr>
+									<td>#{messages['detail.field.what']}</td>
+								</tr>								
+								<tr>
+									<td>#{messages['detail.field.where']}</td>
+								</tr>
+								<tr>
+									<td>#{messages['detail.field.profile']}</td>
+								</tr>
+								<tr>
+									<td>#{messages['detail.field.when']}</td>
+								</tr>
+							</thead>
+							<tbody>
+								<ui:repeat var="field" value="#{trackDashboardMB.fields}">
+									<tr>
+										<td>
+											#{field}
+										</td>
+									</tr>
+								</ui:repeat>
+							</tbody>
+						</table>
+					</li>
+				</ul>
+			
+			</div>
+			
+			<div class="wrapper-history-content">
+	
+				<ul>
+				
+					<ui:repeat var="track" value="#{trackDashboardMB.tracks}">
+					
+						<li>
+							<table>
+								<thead>
+									<tr>
+										<td>#{track.trilha.userName}</td>
+									</tr>
+									<tr>
+										<td>#{track.trilha.what}</td>
+									</tr>									
+									<tr>
+										<td>#{track.trilha.where}</td>
+									</tr>
+									<tr>
+										<td>#{track.trilha.profile}</td>
+									</tr>
+									<tr>
+										<td>
+											<h:outputText value="#{track.trilha.when}">
+												<f:convertDateTime dateStyle="full" pattern="dd/MM/yyyy HH:mm:ss" type="both" locale="pt_BR" timeZone="America/Sao_Paulo"/>
+											</h:outputText>
+										</td>
+									</tr>
+								</thead>
+								<tbody>
+								
+									<ui:repeat var="field" value="#{trackDashboardMB.objectFields}">
+										<tr>
+											<td>
+												#{track.map[field]}	
+											</td>
+										</tr>
+									</ui:repeat>
+								
+									
+								</tbody>
+							</table>	
+						</li>
+					
+					
+					</ui:repeat>
+				</ul>
+			</div>
+			
+			<div style="clear: both;"></div>
+		</div>
+		
+	</h:panelGroup>
+	
+</ui:composition>

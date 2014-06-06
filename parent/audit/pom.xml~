@@ -1,0 +1,236 @@
+<!--
+ Demoiselle Framework
+ Copyright (C) 2010 SERPRO
+ ============================================================================
+ This file is part of Demoiselle Framework.
+
+ Demoiselle Framework is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public License version 3
+ as published by the Free Software Foundation.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU Lesser General Public License version 3
+ along with this program; if not,  see <http://www.gnu.org/licenses />
+ or write to the Free Software Foundation, Inc., 51 Franklin Street,
+ Fifth Floor, Boston, MA  02110-1301, USA.
+ ============================================================================
+ Este arquivo é parte do Framework Demoiselle.
+
+ O Framework Demoiselle é um software livre; você pode redistribuí-lo e/ou
+ modificá-lo dentro dos termos da GNU LGPL versão 3 como publicada pela Fundação
+ do Software Livre (FSF).
+
+ Este programa é distribuído na esperança que possa ser útil, mas SEM NENHUMA
+ GARANTIA; sem uma garantia implícita de ADEQUAÇÃO a qualquer MERCADO ou
+ APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral GNU/LGPL em português
+ para maiores detalhes.
+
+ Você deve ter recebido uma cópia da GNU LGPL versão 3, sob o título
+ "LICENCA.txt", junto com esse programa. Se não, acesse <http://www.gnu.org/licenses />
+ ou escreva para a Fundação do Software Livre (FSF) Inc.,
+ 51 Franklin St, Fifth Floor, Boston, MA 02111-1301, USA.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
+    <artifactId>demoiselle-audit-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>br.gov.frameworkdemoiselle</groupId>
+        <artifactId>demoiselle-component-build-parent</artifactId>
+        <version>9</version>
+    </parent>
+
+    <name>Demoiselle Audit Parent</name>
+    <description> Contém as informações de build comum a todos os projetos do Demoiselle Audit. Se você é usuário do audit, certamente este POM não servirá para você.</description>
+    <url>http://www.frameworkdemoiselle.gov.br</url>
+
+    <licenses>
+        <license>
+            <name>GNU Lesser General Public License, Version 3</name>
+            <url>http://www.gnu.org/licenses/lgpl-3.0.txt</url>
+        </license>
+    </licenses>
+
+    <organization>
+        <name>SERPRO - Serviço Federal de Processamento de Dados</name>
+        <url>http://www.serpro.gov.br</url>
+    </organization>
+
+    <properties>
+        <audit.release.version>1.0.0-SNAPSHOT</audit.release.version>
+        <release.goals>deploy wagon:upload site site:deploy</release.goals>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>repo1.maven</id>
+            <name>Repo1 Maven</name>
+            <url>hhttp://repo1.maven.org/maven2</url>
+        </repository>
+        <repository>
+            <id>sonatype-nexus-snapshots</id>
+            <name>Sonatype Nexus Snapshots</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>sonatype-nexus-releases</id>
+            <name>Sonatype Nexus Releases</name>
+            <url>https://oss.sonatype.org/content/repositories/releases</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+    </repositories>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>demoiselle.sourceforge.net</id>
+            <name>Sonatype Nexus Snapshots</name>
+            <url>sftp://web.sourceforge.net/home/groups/d/de/demoiselle/htdocs/repository/snapshot</url>
+        </snapshotRepository>
+        <repository>
+            <id>demoiselle.sourceforge.net</id>
+            <name>Nexus Release Repository</name>
+            <url>sftp://web.sourceforge.net/home/groups/d/de/demoiselle/htdocs/repository/release</url>
+        </repository>
+    </distributionManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>br.gov.frameworkdemoiselle</groupId>
+            <artifactId>demoiselle-core</artifactId>
+            <version>2.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>br.gov.frameworkdemoiselle.component</groupId>
+            <artifactId>demoiselle-junit</artifactId>
+            <version>2.3.0</version>
+            <scope>test</scope>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.5</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jackson-provider</artifactId>
+            <version>3.0.5.Final</version>
+        </dependency>
+
+        <!-- test -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.16</version>
+        </dependency>
+
+        <!-- Utils -->
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>0.9.9-RC1</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!--This plugin's configuration is used to store Eclipse m2e settings
+                only. It has no influence on the Maven build itself. -->
+                <plugin>
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>1.0.0</version>
+                    <configuration>
+                        <lifecycleMappingMetadata>
+                            <pluginExecutions>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>
+                                            org.apache.maven.plugins
+                                        </groupId>
+                                        <artifactId>
+                                            maven-dependency-plugin
+                                        </artifactId>
+                                        <versionRange>
+                                            [2.1,)
+                                        </versionRange>
+                                        <goals>
+                                            <goal>unpack</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore />
+                                    </action>
+                                </pluginExecution>
+                            </pluginExecutions>
+                        </lifecycleMappingMetadata>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <preparationGoals>clean install</preparationGoals>
+                    <goals>${release.goals}</goals>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <target>1.6</target>
+                    <source>1.6</source>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
