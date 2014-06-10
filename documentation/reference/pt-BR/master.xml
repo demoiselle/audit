@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding="utf-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
    "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" []>
-<book lang="pt">
+<book lang="pt-BR">
 
     <xi:include href="bookinfo.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 
@@ -47,7 +47,7 @@
                         enviados para um banco NoSQL, o mesmo banco da aplicação ou até mesmo um serviço de mensageria.
                     </para>
                 </listitem>
-                 <listitem>
+                <listitem>
                     <para>
                         <caption>Dashboard</caption>
                         Esta implementação não faz parte do mecanismo de funcionamento do Demoiselle Audit, mas serve como ferramenta de
@@ -60,11 +60,8 @@
         </para>
         <para>
 
-             <mediaobject>
-                <imageobject role="html">
-                    <imagedata fileref="images/SP800-92.pdf" align="center"
-                                                   format="PDF" scalefit="1" width="75%" />
-                </imageobject>
+            <mediaobject>
+
                 <caption>
                     <para>NIST
                     </para>
@@ -75,19 +72,33 @@
             <mediaobject>
                 <imageobject role="fo">
                     <imagedata fileref="images/Arquitetura.png" align="center"
-                                                   format="PNG" scalefit="1" width="75%" />
+                               format="PNG" scalefit="1" width="75%" />
                 </imageobject>
                 <imageobject role="html">
                     <imagedata fileref="images/Arquitetura.png" align="center"
-                                                   format="PNG" scalefit="1" width="75%" />
+                               format="PNG" scalefit="1" width="75%" />
                 </imageobject>
                 <caption>
                     <para>Arquitetura da ferramenta Demoisele Audit.
                     </para>
                 </caption>
             </mediaobject>
+            <mediaobject>
+                <imageobject role="fo">
+                    <imagedata fileref="images/Funcionamento.png" align="center"
+                               format="PNG" scalefit="1" width="75%" />
+                </imageobject>
+                <imageobject role="html">
+                    <imagedata fileref="images/Funcionamento.png" align="center"
+                               format="PNG" scalefit="1" width="75%" />
+                </imageobject>
+                <caption>
+                    <para>Funcionamento da ferramenta Demoisele Audit.
+                    </para>
+                </caption>
+            </mediaobject>
         </para>
-     </preface>
+    </preface>
 
     <!-- índice -->
     <toc />
