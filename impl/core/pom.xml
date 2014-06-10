@@ -39,7 +39,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
     <artifactId>demoiselle-audit-core</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0-SNAPSHOT</version>
 
     <properties>
         <project.alias>core</project.alias>
@@ -51,7 +51,7 @@
         <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
         <artifactId>demoiselle-audit-parent</artifactId>
         <relativePath>../../parent/audit/</relativePath>
-        <version>1.0.0</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
     <name>Demoiselle Audit Core</name>

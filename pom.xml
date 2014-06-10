@@ -40,7 +40,7 @@
 
     <groupId>br.gov.frameworkdemoiselle.component</groupId>
     <artifactId>demoiselle-audit-build</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Demoiselle Audit</name>
@@ -57,7 +57,6 @@
         <module>impl/auditors/persistence</module>
         <module>impl/auditors/view</module>
         <module>documentation/reference</module>
-        <!--<module>impl/dashboard</module>-->
     </modules>
 
     <build>
