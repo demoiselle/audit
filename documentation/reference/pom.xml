@@ -25,7 +25,7 @@ Fifth Floor, Boston, MA 02111-1301, USA. -->
 
     <artifactId>demoiselle-audit-reference</artifactId>
     <packaging>jdocbook</packaging>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.1</version>
 
     <parent>
         <groupId>br.gov.frameworkdemoiselle</groupId>
@@ -78,4 +78,8 @@ Fifth Floor, Boston, MA 02111-1301, USA. -->
             </plugin>
         </plugins>
     </build>
+
+  <scm>
+    <tag>demoiselle-audit-build-1.0.1</tag>
+  </scm>
 </project>
