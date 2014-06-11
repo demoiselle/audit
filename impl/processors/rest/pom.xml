@@ -39,7 +39,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
     <artifactId>demoiselle-audit-processors-rest</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
 
     <properties>
         <project.alias>audit-processors-rest</project.alias>
@@ -51,7 +51,7 @@
         <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
         <artifactId>demoiselle-audit-parent</artifactId>
         <relativePath>../../../parent/audit/</relativePath>
-        <version>1.0.0</version>
+        <version>1.0.1-SNAPSHOT</version>
     </parent>
 
     <name>Demoiselle Audit Processors - REST</name>
@@ -74,7 +74,7 @@
         <dependency>
             <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
             <artifactId>demoiselle-audit-core</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.jboss.resteasy</groupId>

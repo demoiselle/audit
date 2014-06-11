@@ -40,7 +40,7 @@
 
     <groupId>br.gov.frameworkdemoiselle.component</groupId>
     <artifactId>demoiselle-audit-build</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Demoiselle Audit</name>
@@ -64,6 +64,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
+                <version>2.5</version>
                 <configuration>
                     <autoVersionSubmodules>true</autoVersionSubmodules>
                     <preparationGoals>clean install</preparationGoals>
@@ -102,9 +103,9 @@
     </distributionManagement>
 
     <scm>
-        <connection>scm:git:git@github.com:demoiselle/${project.alias}.git</connection>
-        <developerConnection>scm:git:git@github.com:demoiselle/${project.alias}.git</developerConnection>
-        <url>http://github.com/demoiselle/${project.alias}</url>
+        <connection>scm:git:git@github.com:demoiselle/audit.git</connection>
+        <developerConnection>scm:git:git@github.com:demoiselle/audit.git</developerConnection>
+        <url>http://github.com/demoiselle/audit</url>
         <tag>HEAD</tag>
     </scm>
 
