@@ -29,7 +29,7 @@ Para utilizar esse Processor é necessário adicionar no pom.xml do seu projeto 
     <dependency>
         <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
         <artifactId>demoiselle-audit-processors-rest</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.3</version>
     </dependency>
 ```
 
@@ -49,7 +49,7 @@ Para utilizar esse Processor é necessário adicionar no pom.xml do seu projeto 
     <dependency>
         <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
         <artifactId>demoiselle-audit-processors-mongo</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.3</version>
     </dependency>
 ```
 
@@ -64,7 +64,7 @@ frameworkdemoiselle.audit.processor.mongo.database.name     | Nome do database
 frameworkdemoiselle.audit.processor.mongo.collection.name   | Nome da coleção
 frameworkdemoiselle.audit.processor.mongo.database.user     | Usuário (se necessário)
 frameworkdemoiselle.audit.processor.mongo.database.password | Senha
-    
+
 ### Criando seu próprio Processor
 
 Você poderá criar o seu próprio ponto de extensão, podendo ser um JMS, FTP, Banco de Dados NoSql, você tem a liberdade de criar, para que isso sejá possível você deve criar um projeto Maven e utilizar o parent no seu pom.xml:
@@ -73,7 +73,7 @@ Você poderá criar o seu próprio ponto de extensão, podendo ser um JMS, FTP, 
 <parent>
     <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
     <artifactId>demoiselle-audit-parent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.3</version>
 </parent>
 ```
 
@@ -112,7 +112,7 @@ Para utilizar esse Auditor é necessário adicionar no pom.xml do seu projeto o 
     <dependency>
         <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
         <artifactId>demoiselle-audit-auditors-persistence</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.3</version>
     </dependency>
 ```
 
@@ -124,7 +124,7 @@ Para utilizar esse Auditor é necessário adicionar no pom.xml do seu projeto o 
     <dependency>
         <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
         <artifactId>demoiselle-audit-auditors-view</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.3</version>
     </dependency>
 ```
 
@@ -138,7 +138,7 @@ Se você tiver interesse em auditar outra camada da sua aplicação você dever�
 <parent>
     <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
     <artifactId>demoiselle-audit-parent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.3</version>
 </parent>
 ```
 
@@ -147,7 +147,7 @@ Se você tiver interesse em auditar outra camada da sua aplicação você dever�
 - Criar um objeto do tipo Trail e preencher seus dados básicos;
 - Chamar o método da **consume([Objeto Trail])**;
 
-Caso seu Processor precise ser configurado, você deverá criar uma Classe que utilize a funcionalidade @Configuration do Demoiselle http://demoiselle.sourceforge.net/docs/framework/reference/2.4.0/html/configuracao.html, 
+Caso seu Processor precise ser configurado, você deverá criar uma Classe que utilize a funcionalidade @Configuration do Demoiselle http://demoiselle.sourceforge.net/docs/framework/reference/2.4.0/html/configuracao.html,
 como exemplo você poderá se basear na classe *impl/processors/rest/src/main/java/br/gov/frameworkdemoiselle/component/audit/processors/rest/RESTConfig.java*
 
 Apartir desse momento o componente estará apto a repassar esse objeto para os Processors definidos no pom.xml do seu projeto.
@@ -176,24 +176,24 @@ Em seu projeto que você deseja auditar, você deve adicionar no seu pom.xml no 
     <dependency>
         <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
         <artifactId>demoiselle-audit-auditors-persistence</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.3</version>
     </dependency>
     <dependency>
         <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
         <artifactId>demoiselle-audit-auditors-view</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.3</version>
     </dependency>
 
     <!-- Processor -->
     <dependency>
        	<groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
       	<artifactId>demoiselle-audit-processors-rest</artifactId>
-       	<version>1.0.0-SNAPSHOT</version>
+       	<version>1.0.3</version>
     </dependency>
     <dependency>
         <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
         <artifactId>demoiselle-audit-processors-mongo</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.3</version>
     </dependency>
     ...
 </dependencies>

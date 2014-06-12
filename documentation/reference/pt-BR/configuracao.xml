@@ -17,30 +17,30 @@
     <dependency>
         <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
         <artifactId>demoiselle-audit-auditors-persistence</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.3</version>
     </dependency>
     <dependency>
         <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
         <artifactId>demoiselle-audit-auditors-view</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.3</version>
     </dependency>
     <dependency>
         <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
         <artifactId>demoiselle-audit-processors-rest</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.3</version>
     </dependency>
     <dependency>
         <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
         <artifactId>demoiselle-audit-processors-mongo</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.3</version>
     </dependency>
 </dependencies>]]></programlisting>
         <para>
             No código acima estamos utilizando o Auditor para a camada de Persistência e para a camada de Visão e o Processor para REST e o Processor para MONGO, você poderá adicionar quantos Processors e quantos Auditors você quiser.
         </para>
     </section>
-    
-    
+
+
     <section>
         <title>Configurações do Sistema</title>
         <para>
@@ -189,7 +189,7 @@
                 </tbody>
             </tgroup>
         </table>
-        
+
         <section>
             <title>PersistenceAuditor</title>
             <para>
@@ -204,7 +204,7 @@ public class Bookmark implements Serializable {
     ...
 }]]></programlisting>
         </section>
-        
+
     </section>
 
     <section>
@@ -217,14 +217,14 @@ public class Bookmark implements Serializable {
                 <listitem><para>Visão de Funcionalidade que se aprofunda no Sistema e a Pessoa que executou;</para></listitem>
                 <listitem><para>Visão de Rastreamento que através de filtros como Sistema, Objeto e Identificador do Objeto mostrar o histórico de operações realizadas no Objeto;</para></listitem>
             </itemizedlist>
-            
+
             O Dashboard também fornece um serviço de REST para o Processor RESTProcessor, caso você utilize este processor no seu projeto e não queira implementar seu próprio serviço de REST você poderá utilizar o Dashboard para essa finalidade.
         </para>
-        
+
         <section>
             <title>Como instalar o Dashboard</title>
             <para>
-                Faça um clone do projeto e acesse a pasta <emphasis>demoiselle-audit/impl/dashboard</emphasis>, você precisará alterar o arquivo persistence.xml de acordo com as configurações do seu banco de dados onde serão armazenados as trilhas de auditoria, após feito essa configuração abra um terminal na pasta do "dashboard" e execute o comando maven:                
+                Faça um clone do projeto e acesse a pasta <emphasis>demoiselle-audit/impl/dashboard</emphasis>, você precisará alterar o arquivo persistence.xml de acordo com as configurações do seu banco de dados onde serão armazenados as trilhas de auditoria, após feito essa configuração abra um terminal na pasta do "dashboard" e execute o comando maven:
             </para>
             <programlisting role="outFile:mvn"><![CDATA[$mvn clean compile package]]></programlisting>
             <para>
@@ -232,7 +232,7 @@ public class Bookmark implements Serializable {
                 Agora que você já tem o arquivo .war você poderá fazer o deploy no seu servidor.
             </para>
         </section>
-            
+
     </section>
-			
+
 </chapter>

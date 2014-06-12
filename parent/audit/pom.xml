@@ -66,7 +66,6 @@
     </organization>
 
     <properties>
-        <audit.release.version>1.0.0-SNAPSHOT</audit.release.version>
         <release.goals>deploy wagon:upload site site:deploy</release.goals>
     </properties>
 
@@ -74,7 +73,7 @@
         <repository>
             <id>repo1.maven</id>
             <name>Repo1 Maven</name>
-            <url>hhttp://repo1.maven.org/maven2</url>
+            <url>http://repo1.maven.org/maven2</url>
         </repository>
         <repository>
             <id>sonatype-nexus-snapshots</id>
@@ -168,7 +167,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>2.5</version>
                 <configuration>
                     <autoVersionSubmodules>true</autoVersionSubmodules>
                     <preparationGoals>clean install</preparationGoals>

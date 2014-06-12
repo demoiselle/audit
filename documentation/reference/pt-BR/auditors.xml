@@ -5,11 +5,11 @@
 
     <title>Auditor</title>
     <para>
-        O objetivo dos Auditors é estabelecer a camada que será auditada, atualmente exste dois Auditors: 
+        O objetivo dos Auditors é estabelecer a camada que será auditada, atualmente exste dois Auditors:
         camada de Persistência chamada PersistenceAuditor e para Visão chamado ViewAuditor.
     </para>
     <para>
-        Um Auditor tem como objetivo executar a coleta de dados, preenchimento do objeto Trail com dados e 
+        Um Auditor tem como objetivo executar a coleta de dados, preenchimento do objeto Trail com dados e
         disparar evento para o Processors.
     </para>
     <para>
@@ -33,10 +33,10 @@
         <programlisting role="XML"><![CDATA[<dependency>
     <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
     <artifactId>demoiselle-audit-auditors-persistence</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.3</version>
 </dependency>]]></programlisting>
     </section>
-    
+
     <section>
         <title>Auditor de Visão</title>
         <para>
@@ -45,10 +45,10 @@
         <programlisting role="XML"><![CDATA[<dependency>
     <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
     <artifactId>demoiselle-audit-auditors-view</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.3</version>
 </dependency>]]></programlisting>
     </section>
-    
+
     <section>
         <title>Criando seu próprio Auditor</title>
         <para>
@@ -62,12 +62,12 @@
                 <programlisting role="XML"><![CDATA[<parent>
     <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
     <artifactId>demoiselle-audit-parent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.3</version>
 </parent>]]></programlisting>
-            </listitem>   
+            </listitem>
             <listitem>
                 <para>Criar uma classe que extenda de <emphasis>br.gov.frameworkdemoiselle.component.audit.implementation.auditors.AbstractAuditor</emphasis>;</para>
-            </listitem>          
+            </listitem>
             <listitem>
                 <para>Implementar os métodos que irão interceptar o ciclo de vida da camada;</para>
             </listitem>
@@ -79,7 +79,7 @@
             </listitem>
             <listitem>
                 <para>
-                    Caso seu Processor precise ser configurado, você deverá criar uma Classe que utilize a funcionalidade @Configuration do Demoiselle <ulink url="http://demoiselle.sourceforge.net/docs/framework/reference/2.4.0/html/configuracao.html"><literal>Demoiselle Configuration</literal></ulink>, 
+                    Caso seu Processor precise ser configurado, você deverá criar uma Classe que utilize a funcionalidade @Configuration do Demoiselle <ulink url="http://demoiselle.sourceforge.net/docs/framework/reference/2.4.0/html/configuracao.html"><literal>Demoiselle Configuration</literal></ulink>,
                     como exemplo você poderá se basear na classe <emphasis>impl/processors/rest/src/main/java/br/gov/frameworkdemoiselle/component/audit/processors/rest/RESTConfig.java</emphasis>
                 </para>
                 <para>
@@ -87,7 +87,7 @@
                 </para>
                 <para>
                     Na sua implementação do seu sistema você deverá informar as seguintes informações:
-                
+
                     <table>
                         <title>Configurações</title>
                         <tgroup cols="2">
@@ -139,7 +139,7 @@
                     Um exemplo de um Auditor esta na classe <emphasis>impl/auditors/persistence/src/main/java/br/gov/frameworkdemoiselle/component/audit/auditors/persistence/PersistenceAuditor.java</emphasis>
                 </para>
 
-                
+
             </listitem>
         </orderedlist>
     </section>
