@@ -40,7 +40,7 @@
 
     <groupId>br.gov.frameworkdemoiselle.component</groupId>
     <artifactId>demoiselle-audit-build</artifactId>
-    <version>1.0.4-SNAPSHOT</version>
+    <version>1.0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Demoiselle Audit</name>
@@ -102,8 +102,8 @@
     </distributionManagement>
 
     <scm>
-        <connection>scm:git:git://git@github.com:demoiselle/${project.alias}.git</connection>
-        <developerConnection>scm:git:git://git@github.com:demoiselle/${project.alias}.git</developerConnection>
+        <connection>scm:git:git@github.com:demoiselle/${project.alias}.git</connection>
+        <developerConnection>scm:git:git@github.com:demoiselle/${project.alias}.git</developerConnection>
         <url>http://github.com/demoiselle/${project.alias}</url>
         <tag>HEAD</tag>
     </scm>
