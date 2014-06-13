@@ -40,7 +40,7 @@
 
     <groupId>br.gov.frameworkdemoiselle.component.audit</groupId>
     <artifactId>demoiselle-audit-parent</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.3</version>
     <packaging>pom</packaging>
 
     <parent>
@@ -190,4 +190,8 @@
             </plugin>
         </plugins>
     </build>
+
+  <scm>
+    <tag>demoiselle-audit-build-1.0.3</tag>
+  </scm>
 </project>
