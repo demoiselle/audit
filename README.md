@@ -283,6 +283,10 @@ http://csrc.nist.gov/publications/nistpubs/800-92/SP800-92.pdf
 - [Bugs e Sugestões](https://github.com/demoiselle/laboratory/issues): Abra um issue para submeter e acompanhar Bugs, enviar dúvidas, propor melhorias ou novas funcionalidades
 - Catálogo de Arquétipos Snapshot: Para versões de desenvolvimento (snapshot)
 - [Aplicação de Exemplo](https://github.com/demoiselle/laboratory/tree/master/examples/bookmark-audit)
+- Exemplos no Openshift 
+    -  http://audit-fwkdemoiselle.rhcloud.com/dashboard/dash.jsf
+    -  http://agenda-fwkdemoiselle.rhcloud.com/index.jsf
+
 
 ## Repositório Maven
 
