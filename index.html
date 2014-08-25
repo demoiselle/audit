@@ -1,0 +1,456 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Audit by demoiselle</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+
+      <header>
+        <h1>Audit</h1>
+        <p>Demoiselle Audit</p>
+      </header>
+
+      <div id="banner">
+        <span id="logo"></span>
+
+        <a href="https://github.com/demoiselle/audit" class="button fork"><strong>View On GitHub</strong></a>
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/demoiselle/audit/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/demoiselle/audit/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+      </div><!-- end banner -->
+
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
+        <h1>
+<a name="demoiselle-audit" class="anchor" href="#demoiselle-audit"><span class="octicon octicon-link"></span></a>Demoiselle Audit</h1>
+
+<p>É o componente do Framework Demoiselle para gravação de trilhas das ações dos usuários que pode ser usado para realização de Auditoria, sua arquitetura foi projetada para ser flexível assim como o Framework Demoiselle.</p>
+
+<p>Se você tem a necessidade de responder a algumas perguntas do que esta acontecendo na sua camada de dados como:</p>
+
+<ul>
+<li>Quem fez a operação?</li>
+<li>Horário da operação?</li>
+<li>IP de origem</li>
+<li>Nome do Sistema</li>
+<li>O que foi realizado?</li>
+<li>Qual objeto foi manipulado?</li>
+<li>Quais foram os dados atingidos pela operação?</li>
+</ul><p>Então esse componente serve para você.</p>
+
+<p>Esse componente foi desenhado para ser multi-sistemas podendo ser instalado em um servidor a parte e vários sistemas enviarem para ele as trilhas de auditoria.</p>
+
+<h2>
+<a name="processors" class="anchor" href="#processors"><span class="octicon octicon-link"></span></a>Processors</h2>
+
+<p>Um Processor tem como finalidade dar um destino que você deseja para o objeto que representa a trilha de auditoria.</p>
+
+<p>Atualmente estamos disponibilizando um Processor de REST para atender a questão de ser multi-sistema e outro Processor para MONGO.</p>
+
+<h3>
+<a name="processor-rest" class="anchor" href="#processor-rest"><span class="octicon octicon-link"></span></a>Processor REST</h3>
+
+<p>Para utilizar esse Processor é necessário adicionar no pom.xml do seu projeto o seguinte trecho:</p>
+
+<div class="highlight highlight-xml"><pre>    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>br.gov.frameworkdemoiselle.component.audit<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>demoiselle-audit-processors-rest<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>1.0.3<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+</pre></div>
+
+<h4>
+<a name="configura%C3%A7%C3%A3o-demoiselleproperties" class="anchor" href="#configura%C3%A7%C3%A3o-demoiselleproperties"><span class="octicon octicon-link"></span></a>Configuração demoiselle.properties</h4>
+
+<p>Para o correto funcionamento é necessário adicionar no demoiselle.properties as seguintes configurações:</p>
+
+<table>
+<thead><tr>
+<th>Chave</th>
+<th>Descrição</th>
+</tr></thead>
+<tbody><tr>
+<td>frameworkdemoiselle.audit.processor.rest.server.url</td>
+<td>URL do serviço REST para o envio das trilhas.</td>
+</tr></tbody>
+</table><h3>
+<a name="processor-mongo" class="anchor" href="#processor-mongo"><span class="octicon octicon-link"></span></a>Processor MONGO</h3>
+
+<p>Para utilizar esse Processor é necessário adicionar no pom.xml do seu projeto o seguinte trecho:</p>
+
+<div class="highlight highlight-xml"><pre>    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>br.gov.frameworkdemoiselle.component.audit<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>demoiselle-audit-processors-mongo<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>1.0.3<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+</pre></div>
+
+<h4>
+<a name="configura%C3%A7%C3%A3o-demoiselleproperties-1" class="anchor" href="#configura%C3%A7%C3%A3o-demoiselleproperties-1"><span class="octicon octicon-link"></span></a>Configuração demoiselle.properties</h4>
+
+<p>Para o correto funcionamento é necessário adicionar no demoiselle.properties as seguintes configurações:</p>
+
+<table>
+<thead><tr>
+<th>Chave</th>
+<th>Descrição</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>frameworkdemoiselle.audit.processor.mongo.server.url</td>
+<td>URL do servidor onde se encontra o MongoDB</td>
+</tr>
+<tr>
+<td>frameworkdemoiselle.audit.processor.mongo.database.name</td>
+<td>Nome do database</td>
+</tr>
+<tr>
+<td>frameworkdemoiselle.audit.processor.mongo.collection.name</td>
+<td>Nome da coleção</td>
+</tr>
+<tr>
+<td>frameworkdemoiselle.audit.processor.mongo.database.user</td>
+<td>Usuário (se necessário)</td>
+</tr>
+<tr>
+<td>frameworkdemoiselle.audit.processor.mongo.database.password</td>
+<td>Senha</td>
+</tr>
+</tbody>
+</table><h3>
+<a name="criando-seu-pr%C3%B3prio-processor" class="anchor" href="#criando-seu-pr%C3%B3prio-processor"><span class="octicon octicon-link"></span></a>Criando seu próprio Processor</h3>
+
+<p>Você poderá criar o seu próprio ponto de extensão, podendo ser um JMS, FTP, Banco de Dados NoSql, você tem a liberdade de criar, para que isso sejá possível você deve criar um projeto Maven e utilizar o parent no seu pom.xml:</p>
+
+<div class="highlight highlight-xml"><pre><span class="nt">&lt;parent&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>br.gov.frameworkdemoiselle.component.audit<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>demoiselle-audit-parent<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>1.0.3<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/parent&gt;</span>
+</pre></div>
+
+<p>Criar uma classe que extenda de <strong>br.gov.frameworkdemoiselle.component.audit.implementation.processor.AbstractProcessor</strong> e implementar o método <strong>public void execute(@Observes @AuditProcessor Trail trail)</strong>.</p>
+
+<p>É dentro do bloco de código você implementará o destino que você deseja dar ao objeto Trail.</p>
+
+<p>Para o bom funcionamento do seu Processor você deverá seguir as seguintes recomendações:</p>
+
+<ul>
+<li>Antes de implementar seu código é necessário chamar o método <strong>super.execute(trail)</strong> para que o componente possa saber qual é a classe do Processor que esta sendo processada, isso é necessário para a situação de falha na execução do seu Processor e o componente possa reprocessar novamente no futuro;</li>
+<li>Quando houver algum tratamento de exceção no seu código como blocos try e catch você deverá além de realizar seu próprio tratamento a chamada do método <strong>fail([String com a mensagem de Erro], [Objeto Trail]);</strong> para que o componente possa reprocessar novamente no futuro;</li>
+</ul><p>Você pode basear sua implementação no código do RESTProcessor no caminnho <em>impl/processors/rest/src/main/java/br/gov/frameworkdemoiselle/component/audit/processors/rest/RESTProcessors.java</em></p>
+
+<h2>
+<a name="auditors" class="anchor" href="#auditors"><span class="octicon octicon-link"></span></a>Auditors</h2>
+
+<p>O objetivo dos Auditors é estabelecer a camada que será auditada, atualmente exste dois Auditors: camada de Persistência chamada PersistenceAuditor e para Visão chamado ViewAuditor.</p>
+
+<p>Um Auditor tem como objetivo executar a coleta de dados, preenchimento do objeto Trail com dados e disparar evento para o Processors.</p>
+
+<p>Os dados coletados pelos Auditor são:</p>
+
+<ul>
+<li>Quem fez a operação?</li>
+<li>Horário da operação?</li>
+<li>IP de origem</li>
+<li>Nome do Sistema</li>
+<li>O que foi realizado?</li>
+<li>Qual objeto foi manipulado?</li>
+<li>Quais foram os dados atingidos pela operação?</li>
+</ul><h3>
+<a name="auditor-de-persist%C3%AAncia" class="anchor" href="#auditor-de-persist%C3%AAncia"><span class="octicon octicon-link"></span></a>Auditor de Persistência</h3>
+
+<p>Para utilizar esse Auditor é necessário adicionar no pom.xml do seu projeto o seguinte trecho:</p>
+
+<div class="highlight highlight-xml"><pre>    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>br.gov.frameworkdemoiselle.component.audit<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>demoiselle-audit-auditors-persistence<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>1.0.3<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+</pre></div>
+
+<h3>
+<a name="auditor-de-vis%C3%A3o" class="anchor" href="#auditor-de-vis%C3%A3o"><span class="octicon octicon-link"></span></a>Auditor de Visão</h3>
+
+<p>Para utilizar esse Auditor é necessário adicionar no pom.xml do seu projeto o seguinte trecho:</p>
+
+<div class="highlight highlight-xml"><pre>    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>br.gov.frameworkdemoiselle.component.audit<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>demoiselle-audit-auditors-view<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>1.0.3<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+</pre></div>
+
+<h3>
+<a name="criando-seu-pr%C3%B3prio-auditor" class="anchor" href="#criando-seu-pr%C3%B3prio-auditor"><span class="octicon octicon-link"></span></a>Criando seu próprio Auditor</h3>
+
+<p>Se você tiver interesse em auditar outra camada da sua aplicação você deverá:</p>
+
+<ul>
+<li>Criar um projeto Maven e utilizar o parent no seu pom.xml</li>
+</ul><div class="highlight highlight-xml"><pre><span class="nt">&lt;parent&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>br.gov.frameworkdemoiselle.component.audit<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>demoiselle-audit-parent<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>1.0.3<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/parent&gt;</span>
+</pre></div>
+
+<ul>
+<li>Criar uma classe que extenda de <strong>br.gov.frameworkdemoiselle.component.audit.implementation.auditors.AbstractAuditor</strong>;</li>
+<li>Implementar os métodos que irão interceptar o ciclo de vida da camada;</li>
+<li>Criar um objeto do tipo Trail e preencher seus dados básicos;</li>
+<li>Chamar o método da <strong>consume([Objeto Trail])</strong>;</li>
+</ul><p>Caso seu Processor precise ser configurado, você deverá criar uma Classe que utilize a funcionalidade <a href="https://github.com/Configuration" class="user-mention">@Configuration</a> do Demoiselle <a href="http://demoiselle.sourceforge.net/docs/framework/reference/2.4.0/html/configuracao.html">http://demoiselle.sourceforge.net/docs/framework/reference/2.4.0/html/configuracao.html</a>,
+como exemplo você poderá se basear na classe <em>impl/processors/rest/src/main/java/br/gov/frameworkdemoiselle/component/audit/processors/rest/RESTConfig.java</em></p>
+
+<p>Apartir desse momento o componente estará apto a repassar esse objeto para os Processors definidos no pom.xml do seu projeto.</p>
+
+<p>Na sua implementação do seu sistema você deverá informar as seguintes informações:</p>
+
+<table>
+<thead><tr>
+<th>Dado</th>
+<th>Local de Preenchimento</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Profile</td>
+<td>user.setAttribute("PROFILE", [Profile/Perfil do usuário no sistema])</td>
+</tr>
+<tr>
+<td>Where</td>
+<td>user.setAttribute("IP", [IP do usuário no sistema])</td>
+</tr>
+<tr>
+<td>UserName</td>
+<td>user.setAttribute("NAME", [Login/Nome/Identificador do usuário no sistema])</td>
+</tr>
+</tbody>
+</table><p>Maiores informações no link <a href="http://demoiselle.sourceforge.net/docs/framework/reference/2.4.0/html/security.html">http://demoiselle.sourceforge.net/docs/framework/reference/2.4.0/html/security.html</a></p>
+
+<p>Um exemplo de um Auditor esta na classe <em>impl/auditors/persistence/src/main/java/br/gov/frameworkdemoiselle/component/audit/auditors/persistence/PersistenceAuditor.java</em></p>
+
+<h2>
+<a name="como-utilizar" class="anchor" href="#como-utilizar"><span class="octicon octicon-link"></span></a>Como utilizar</h2>
+
+<h3>
+<a name="pomxml" class="anchor" href="#pomxml"><span class="octicon octicon-link"></span></a>pom.xml</h3>
+
+<p>Em seu projeto que você deseja auditar, você deve adicionar no seu pom.xml no campo de dependências do projeto as seguintes linhas:</p>
+
+<div class="highlight highlight-xml"><pre><span class="nt">&lt;dependencies&gt;</span>
+    ...
+    <span class="c">&lt;!-- Auditor --&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>br.gov.frameworkdemoiselle.component.audit<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>demoiselle-audit-auditors-persistence<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>1.0.3<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>br.gov.frameworkdemoiselle.component.audit<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>demoiselle-audit-auditors-view<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>1.0.3<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+
+    <span class="c">&lt;!-- Processor --&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>br.gov.frameworkdemoiselle.component.audit<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>demoiselle-audit-processors-rest<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>1.0.3<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>br.gov.frameworkdemoiselle.component.audit<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>demoiselle-audit-processors-mongo<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>1.0.3<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+    ...
+<span class="nt">&lt;/dependencies&gt;</span>
+</pre></div>
+
+<p>No código acima estamos utilizando o Auditor para a camada de Persistência e para a camada de Visão e o Processor para REST e o Processor para MONGO, você poderá adicionar quantos Processors e quantos Auditors você quiser.</p>
+
+<h3>
+<a name="demoiselleproperties" class="anchor" href="#demoiselleproperties"><span class="octicon octicon-link"></span></a>demoiselle.properties</h3>
+
+<p>No seu arquivo demoiselle.properties você precisará adicionar as seguintes linhas:</p>
+
+<table>
+<thead><tr>
+<th>Chave</th>
+<th>Valor</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>frameworkdemoiselle.audit.system</td>
+<td>Nome do seu Sistema</td>
+</tr>
+<tr>
+<td>frameworkdemoiselle.audit.scheduler.repeat.interval</td>
+<td>Intervalo de tempo em milisegundos para o reprocessamento das trilhas</td>
+</tr>
+<tr>
+<td>frameworkdemoiselle.audit.scheduler.start.time</td>
+<td>Tempo em milisegundos de quando será executado o primeiro reprocessamento após o inicio da aplicação</td>
+</tr>
+<tr>
+<td>frameworkdemoiselle.audit.folder.fail.objects</td>
+<td>Pasta onde a aplicação terá direito de escrita e leitura para o armazenamento das trilhas que apresentaram problemas no processamento</td>
+</tr>
+</tbody>
+</table><p>Para o Processor de REST você deverá adicionar a seguinte linha:</p>
+
+<table>
+<thead><tr>
+<th>Chave</th>
+<th>Valor</th>
+</tr></thead>
+<tbody><tr>
+<td>frameworkdemoiselle.audit.processor.rest.server.url</td>
+<td>Endereço do Serviço REST (Ex.: http://localhost:8080/dash)</td>
+</tr></tbody>
+</table><p>Para o Processor de MONGO você deverá adicionar a seguinte linha:</p>
+
+<table>
+<thead><tr>
+<th>Chave</th>
+<th>Valor</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>frameworkdemoiselle.audit.processor.mongo.server.url</td>
+<td>Endereço do MongoDB</td>
+</tr>
+<tr>
+<td>frameworkdemoiselle.audit.processor.mongo.database.name</td>
+<td>Nome do Database</td>
+</tr>
+<tr>
+<td>frameworkdemoiselle.audit.processor.mongo.collection.name</td>
+<td>Nome da Coleção</td>
+</tr>
+<tr>
+<td>frameworkdemoiselle.audit.processor.mongo.database.user</td>
+<td>Usuário (se necessário)</td>
+</tr>
+<tr>
+<td>frameworkdemoiselle.audit.processor.mongo.database.password</td>
+<td>Senha</td>
+</tr>
+</tbody>
+</table><h3>
+<a name="persistenceauditor" class="anchor" href="#persistenceauditor"><span class="octicon octicon-link"></span></a>PersistenceAuditor</h3>
+
+<p>Você poderá escolher quais serão suas Entidades JPA que serão auditadas na camada de persistência, para isso adicione a anotação do JPA @EntityListeners com o valor de PersistenceAuditor.class.</p>
+
+<p>Exemplo</p>
+
+<div class="highlight highlight-java"><pre><span class="nd">@Entity</span>
+<span class="nd">@EntityListeners</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="n">PersistenceAuditor</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Bookmark</span> <span class="kd">implements</span> <span class="n">Serializable</span> <span class="o">{</span>
+    <span class="o">...</span>
+<span class="o">}</span>
+</pre></div>
+
+<h2>
+<a name="dashboard" class="anchor" href="#dashboard"><span class="octicon octicon-link"></span></a>Dashboard</h2>
+
+<p>Para facilitar a busca de informações do que foi feito no sistema contruímos um Dashboard que traz 4 visões diferentes dos mesmos dados:</p>
+
+<ul>
+<li>Visão de Sistema que se aprofunda em Pessoa e a Funcionalidade executada;</li>
+<li>Visão da Pessoa que se aprofunda no Sistema e a Funcionalidade executada;</li>
+<li>Visão de Funcionalidade que se aprofunda no Sistema e a Pessoa que executou;</li>
+<li>Visão de Rastreamento que através de filtros como Sistema, Objeto e Identificador do Objeto mostrar o histórico de operações realizadas no Objeto;</li>
+</ul><p>O Dashboard também fornece um serviço de REST para o Processor RESTProcessor, caso você utilize este processor no seu projeto e não queira implementar seu próprio serviço de REST você poderá utilizar o Dashboard para essa finalidade.</p>
+
+<h3>
+<a name="como-instalar-o-dashboard" class="anchor" href="#como-instalar-o-dashboard"><span class="octicon octicon-link"></span></a>Como instalar o Dashboard</h3>
+
+<p>Faça um clone do projeto e acesse a pasta <strong>demoiselle-audit/impl/dashboard</strong>, você precisará alterar o arquivo persistence.xml de acordo com as configurações do seu banco de dados onde serão armazenados as trilhas de auditoria, após feito essa configuração abra um terminal na pasta do "dashboard" e execute o comando maven:</p>
+
+<pre><code>    $mvn clean compile package
+</code></pre>
+
+<p>Esse comando irá gerar um arquivo chamado <strong>demoiselle-audit-dashboard.war</strong> na pasta target.</p>
+
+<p>Agora que você já tem o arquivo .war você poderá fazer o deploy no seu servidor.</p>
+
+<h2>
+<a name="exemplo-de-aplica%C3%A7%C3%A3o" class="anchor" href="#exemplo-de-aplica%C3%A7%C3%A3o"><span class="octicon octicon-link"></span></a>Exemplo de Aplicação</h2>
+
+<p>Você encontrará no link <a href="https://github.com/demoiselle/laboratory/tree/master/examples">https://github.com/demoiselle/laboratory/tree/master/examples</a> o projeto BookmarkAudit que utiliza o componente de auditoria;</p>
+
+<h2>
+<a name="recomenda%C3%A7%C3%B5es" class="anchor" href="#recomenda%C3%A7%C3%B5es"><span class="octicon octicon-link"></span></a>Recomendações</h2>
+
+<p>Por se tratar de um componente de auditoria alguns pontos devem ser observados:</p>
+
+<ul>
+<li>O servidor onde serão armazenadas as trilhas de auditoria deverá ser blindado e com acesso restrito para que seja garantida a confiabilidade das informações armazenadas;</li>
+<li>Seguir as recomendações do NIST no link
+<a href="http://csrc.nist.gov/publications/nistpubs/800-92/SP800-92.pdf">http://csrc.nist.gov/publications/nistpubs/800-92/SP800-92.pdf</a>
+</li>
+</ul><h2>
+<a name="links-%C3%BAteis" class="anchor" href="#links-%C3%BAteis"><span class="octicon octicon-link"></span></a>Links úteis</h2>
+
+<ul>
+<li>Documentação: Aprenda agora! <em>(por enquanto o próprio README.md, estamos trabalhando para criar uma documentação no formato docbook)</em>
+</li>
+<li>
+<a href="https://github.com/demoiselle/laboratory/issues">Fórum</a>: Abra um issue para discutirmos um assunto.</li>
+<li>
+<a href="https://github.com/demoiselle/laboratory/issues">Bugs e Sugestões</a>: Abra um issue para submeter e acompanhar Bugs, enviar dúvidas, propor melhorias ou novas funcionalidades</li>
+<li>Catálogo de Arquétipos Snapshot: Para versões de desenvolvimento (snapshot)</li>
+<li><a href="https://github.com/demoiselle/laboratory/tree/master/examples/bookmark-audit">Aplicação de Exemplo</a></li>
+<li>Exemplos no Openshift 
+
+<ul>
+<li> <a href="http://audit-fwkdemoiselle.rhcloud.com/dashboard/dash.jsf">http://audit-fwkdemoiselle.rhcloud.com/dashboard/dash.jsf</a>
+</li>
+<li> <a href="http://agenda-fwkdemoiselle.rhcloud.com/index.jsf">http://agenda-fwkdemoiselle.rhcloud.com/index.jsf</a>
+</li>
+</ul>
+</li>
+</ul><h2>
+<a name="reposit%C3%B3rio-maven" class="anchor" href="#reposit%C3%B3rio-maven"><span class="octicon octicon-link"></span></a>Repositório Maven</h2>
+
+<p>A publicar</p>
+
+<h2>
+<a name="todo" class="anchor" href="#todo"><span class="octicon octicon-link"></span></a>Todo</h2>
+
+<ul>
+<li>Melhoria nos testes;</li>
+<li>Arquétipos para Auditors e Processors;</li>
+</ul><h2>
+<a name="contribuindo" class="anchor" href="#contribuindo"><span class="octicon octicon-link"></span></a>Contribuindo</h2>
+
+<p>Faça um clone do projeto e ajude a crescer esse projeto :)</p>
+      </section>
+      <footer>
+        <p>Project maintained by <a href="https://github.com/demoiselle">demoiselle</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
